@@ -57,4 +57,22 @@ class UsersController< ApplicationController
       redirect_to("/", { :alert => "Unable to delete follow request." })
     end
   end
+
+  def update_follow_request
+    @follow_request = FollowRequest.where(
+      recipient_id: current_user.id,
+      sender_id: params.fetch("path_id")
+    ).first
+
+    @follow_request.status = params.fetch("query_status")
+
+    if @follow_request.valid?
+      @follow_request.save
+      redirect_to("/users/#{current_user.username}", { :notice => "Follow request updated." })
+    else
+      redirect_to("/users/#{current_user.username}", { :alert => "Unable to update follow request." })
+    end
+
+  end 
+
 end

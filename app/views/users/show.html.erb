@@ -1,4 +1,4 @@
-<h1>alice</h1>
+<h1><%= @the_user.username %></h1>
 
 
   <dt>Private</dt>
@@ -11,9 +11,10 @@
 
     </div>
 
+      <%if @the_user.id == current_user.id %>
       <h4>Pending follow requests</h4>
       <ul>
-        <% @the_user.pending_leaders.each do |user| %>
+        <% @the_user.pending_followers.each do |user| %>
           <li>
             <%= user.username %>
             <form action="/modify_follow_request/<%= user.id%>" method="post">
@@ -33,6 +34,7 @@
           </li>
         <% end %>
       </ul>
+      <%end%>
     </div>
   
 <dt>Following</dt>
