@@ -46,7 +46,7 @@
       <button>Like</button>
     </form>
   </dd>
-
+ <%if @the_photo.poster.id == current_user.id%>
     <dt>Edit photo</dt>
   <dd>
     <form action="/modify_photo/<%= @the_photo.id %>" method="post">
@@ -59,12 +59,16 @@
       <button>Update photo</button>
     </form>
   </dd>
+  <% end %>
+
+  <%if @the_photo.poster.id == current_user.id%>
   <dt>Delete photo</dt>
   <dd>
     <a href="/delete_photo/<%= @the_photo.id %>">
       Delete this photo
     </a>
   </dd>
+  <% end %>
   </dl>
 
 <h2>Comments</h2>

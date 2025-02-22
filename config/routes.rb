@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   post("/insert_follow_request", { :controller => "users", :action => "create_follow_request" })
   get("/delete_follow_request/:path_id", { controller: "users", action: "destroy_follow_request" })
   post("modify_follow_request/:path_id", { controller: "users", action: "update_follow_request" })
+
+  post("/insert_like", { :controller => "likes", :action => "create" })
 end
