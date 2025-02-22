@@ -75,4 +75,14 @@ class UsersController< ApplicationController
 
   end 
 
+  def feed
+    @the_user_name = params.fetch("username")
+    @the_user = User.where({ :username => @the_user_name }).at(0)
+
+    @user_leaders = User.where({ :id => @the_user.id }).at(0).leaders
+    @user_following_photos = Photo.where({ :owner_id => @user_leaders.pluck(:recipient_id) })
+
+    render({ :template => "users/feed" })
+  end
+
 end
