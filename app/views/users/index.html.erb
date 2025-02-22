@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Target: Photogram Final</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+  <body>
+  <h1>List of users
+  </h1>
+  <ul>
+    <% @all_users.each do |user| %>
+      <li>
+        <a href="/users/<%= user.id %>">
+          <%= user.username %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  </body>
+</html>

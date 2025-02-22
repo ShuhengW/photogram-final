@@ -17,6 +17,59 @@
         <%= alert %>
       </div>
     <% end %>
-    <%= yield %>
+
+  <% if current_user != nil%>
+    <ul>
+      <li>
+        <a href="/users">
+          All users
+        </a>
+      </li>
+
+      <li>
+        <a href="/photos">
+          All public photos
+        </a>
+      </li>
+
+        <li>
+          <a href="/users/edit">
+            <%= User.where({:id =>current_user.id}).at(0).username %>
+          </a>
+        </li>
+        <li>
+          <a href="/users/sign_out">
+            Sign out
+          </a>
+        </li>
+    </ul>
+  <% else %>
+    <ul>
+          <li>
+        <a href="/users">
+          All users
+        </a>
+      </li>
+
+      <li>
+        <a href="/photos">
+          All public photos
+        </a>
+      </li>
+      <li>
+        <a href="/users/sign_in">
+          Sign in
+        </a>
+      </li>
+
+      <li>
+        <a href="/users/sign_up">
+          Sign up
+        </a>
+      </li>
+    </ul>
+  <% end %>
+
+  <%= yield %>
   </body>
 </html>
