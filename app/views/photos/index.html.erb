@@ -35,7 +35,7 @@
   <% @list_of_photos.each do |photo| %>
     <%if !photo.poster.private%>
     <tr>
-      <td><img src="<%= photo.image %>"></td>
+      <td><img src="<%= photo.image%>"></td>
       <td><%= photo.caption %></td>
       <td><%= photo.poster.username %></td>
       <td><%= photo.created_at %></td>
