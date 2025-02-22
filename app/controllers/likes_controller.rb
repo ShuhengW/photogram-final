@@ -13,4 +13,15 @@ class LikesController< ApplicationController
     end
 
   end 
+
+  def destroy
+    @like = Like.where({ :photo_id => params.fetch("path_id"), :fan_id => current_user.id }).at(0)
+
+    if @like
+      @like.destroy
+      redirect_to("/photos/#{@like.photo_id}", { :notice => "Like deleted successfully." })
+    else
+      redirect_to("/photos/#{@like.photo_id}", { :alert => "Unable to delete like." })
+    end
+  end
 end 
