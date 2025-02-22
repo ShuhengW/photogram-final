@@ -35,4 +35,6 @@ Rails.application.routes.draw do
   get("/delete_like/:path_id", { :controller => "likes", :action => "destroy" })
 
   get("/users/:username/feed", { :controller => "users", :action => "feed" })
+
+  post("/insert_comment",  { :controller => "comments", :action => "create" })
 end
