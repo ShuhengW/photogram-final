@@ -7,6 +7,8 @@
   <body>
   <h1>List of users
   </h1>
+
+  <% if current_user == nil%>
   <table border="1">
   <tr>
     <th>
@@ -31,12 +33,74 @@
       </td>
 
       <td>
-        <a href="/users/<%= user.username %>">
+        <a href="/users/sign_in">
         Show details</a>
         </a>
       </td>
     </tr>
   <% end %>
 
+<% else %>
+
+<table border="1">
+  <tr>
+    <th>
+      Username
+    </th>
+
+    <th>
+      Private?
+    </th>
+
+    <th></th>
+    <th></th>
+  </tr>
+  <% @all_users.each do |user| %>
+    <tr>
+      <td>     
+          <%= user.username %>
+      </td>
+
+      <td>
+        <%= user.private? ? "Yes" : "No" %>
+      </td>
+      <td>
+            <% if !current_user.leaders.where(id: user.id).exists? %>
+              <% if current_user.pending_leaders.where(id: user.id).exists?%>
+                          Request sent.
+                <a href="/delete_follow_request/<%= user.id %>">
+                  Cancel
+                </a>
+              <%else%>
+                <form action="/insert_follow_request" method="post">
+                  <input type="hidden" name="query_recipient_id" value="user.id">
+                  <button>
+                    Follow
+                  </button>
+                </form>
+              <%end%>
+            <%else%>
+            <a href="/delete_follow_request/<%= user.id %>">
+              Unfollow
+            </a>
+            <%end%>
+      </td>
+      <td>
+         <% if !user.private %>
+        <a href="/users/<%= user.username %>">
+        Show details</a>
+        </a>
+        <% else %>
+          <a href="/">
+            Show details
+          </a>
+        <% end %>
+      </td>
+
+    </tr>
+  <% end %>
+
+
+<%end%>
   </body>
 </html>

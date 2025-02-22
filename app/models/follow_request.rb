@@ -10,4 +10,6 @@
 #  sender_id    :integer
 #
 class FollowRequest < ApplicationRecord
+  belongs_to(:sender, :required => false, :class_name => "User", :foreign_key => "sender_id" ,primary_key: "id")
+  belongs_to(:recipient, :required => false, :class_name => "User", :foreign_key => "recipient_id" ,primary_key: "id")
 end
