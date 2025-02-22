@@ -73,7 +73,7 @@
                 </a>
               <%else%>
                 <form action="/insert_follow_request" method="post">
-                  <input type="hidden" name="query_recipient_id" value="user.id">
+                  <input type="hidden" name="query_recipient_id" value=<%= user.id %>>
                   <button>
                     Follow
                   </button>
