@@ -68,9 +68,7 @@
             <% if !current_user.leaders.where(id: user.id).exists? %>
               <% if current_user.pending_leaders.where(id: user.id).exists?%>
                           Request sent.
-                <a href="/delete_follow_request/<%= user.id %>">
-                  Cancel
-                </a>
+                <%= link_to "Cancel", "/delete_follow_request/#{user.id}"%>
               <%else%>
                 <form action="/insert_follow_request" method="post">
                   <input type="hidden" name="query_recipient_id" value=<%= user.id %>>
@@ -80,9 +78,7 @@
                 </form>
               <%end%>
             <%else%>
-            <a href="/delete_follow_request/<%= user.id %>">
-              Unfollow
-            </a>
+             <%= link_to "Unfollow", "/delete_follow_request/#{user.id}"%>
             <%end%>
       </td>
       <td>

@@ -28,5 +28,5 @@ Rails.application.routes.draw do
   get("/users", { :controller => "users", :action => "index" })
   get("/users/:username", { :controller => "users", :action => "show" })
   post("/insert_follow_request", { :controller => "users", :action => "create_follow_request" })
-
+  get("/delete_follow_request/:path_id", { controller: "users", action: "destroy_follow_request" })
 end
