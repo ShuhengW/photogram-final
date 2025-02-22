@@ -34,4 +34,7 @@ class User < ApplicationRecord
   has_many(:leaders, :through => :accepted_sent_follow_requests, :source => :recipient)
   has_many(:pending_followers, :through => :pending_received_follow_requests, :source => :sender)
   has_many(:pending_leaders, :through => :pending_sent_follow_requests, :source => :recipient)
+
+  has_many(:own_photos, :class_name => "Photo", :foreign_key => "owner_id", primary_key: "id")
+  
 end

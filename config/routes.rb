@@ -25,5 +25,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root to: "user#index"
   get("/", { :controller => "users", :action => "index" })
+  get("/users", { :controller => "users", :action => "index" })
+  get("/users/:username", { :controller => "users", :action => "show" })
 
 end

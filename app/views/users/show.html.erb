@@ -1,0 +1,77 @@
+<h1>alice</h1>
+
+
+  <dt>Private</dt>
+  <dd><%= @the_user.private %></dd>
+
+  <dt>Followers</dt>
+  <dd>
+    <%= @the_user.followers.count%>
+  </dd>
+
+    </div>
+
+      <h4>Pending follow requests</h4>
+      <ul>
+        <% @the_user.pending_leaders.each do |user| %>
+          <li>
+            <%= user.username %>
+            <form action="/modify_follow_request/<%= user.id%>" method="post">
+              <input name="query_status" value="accepted" type="hidden">
+
+              <button>
+                Accept
+              </button>
+            </form>
+            <form action="/modify_follow_request/1815" method="post">
+              <input name="query_status" value="rejected" type="hidden">
+            
+              <button>
+                Reject
+              </button>
+            </form>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  
+<dt>Following</dt>
+<dd><%=@the_user.leaders.count %></dd>
+
+<h2>Own photos (<%= @the_user.own_photos.count%>)</h2>
+
+<table border="1">
+  <tr>
+    <th>Image</th>
+    <th>Owner</th>
+    <th>Caption</th>
+    <th>Posted</th>
+    <th>Likes</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @the_user.own_photos.each do |photo| %>
+    <tr>
+      <td>
+        <img src="<%= photo.image %>" class="img-responsive">
+      </td>
+      <td>
+        <%= @the_user.username %>
+      </td>
+      <td>
+        <%= photo.caption %>
+      </td>
+      <td>
+        <%= photo.created_at %>
+      </td>
+      <td>
+        <%= photo.likes.count %>
+      </td>
+      <td>
+            <a href="/photos/<%= photo.id %>">
+              Show details
+            </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
